@@ -49,4 +49,16 @@ class AbstractScraper
 		$this->experience = $experience;
 	}
 
+
+	public function __construct(UrlBuilderInterface $urlBuilder, ExtractorInterface $extractor)
+	{
+		$this->urlBuilder = $urlBuilder;
+		$this->extractor = $extractor;
+	}
+
+	public function getScrapedData(): array
+	{
+		return $this->data;
+	}
+
 }

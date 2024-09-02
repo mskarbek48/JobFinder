@@ -20,6 +20,6 @@ class JustJoinItUrlBuilder implements UrlBuilderInterface
 {
 	public function buildUrl(TechnologyInterface $technology, string $location, ExperienceInterface $experience): string
 	{
-		return "https://justjoin.it/" . $location . "/" . $technology->getName() . "/" . $experience->getName();
+		return "https://justjoin.it/" . strtolower($location) . "/" . strtolower($technology->getName()) . "/" . strtolower($experience->getName());
 	}
 }

@@ -24,11 +24,7 @@ class TheProtocolIt extends AbstractScraper implements ScraperInterface
 {
 	const URL = "https://theprotocol.it/";
 
-	public function __construct(UrlBuilderInterface $urlBuilder, ExtractorInterface $extractor)
-	{
-		$this->urlBuilder = $urlBuilder;
-		$this->extractor = $extractor;
-	}
+
 
 	public function scrape(): void
 	{
@@ -56,8 +52,4 @@ class TheProtocolIt extends AbstractScraper implements ScraperInterface
 		$this->data = $jobs;
 	}
 
-	public function getScrapedData(): array
-	{
-		return $this->data;
-	}
 }

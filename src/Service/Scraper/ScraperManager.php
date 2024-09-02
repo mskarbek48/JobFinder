@@ -39,7 +39,7 @@ class ScraperManager
 	{
 		$data = [];
 		foreach ($this->scrapers as $scraper) {
-			$data[] = $scraper->getScrapedData();
+			$data = array_merge($data, $scraper->getScrapedData());
 		}
 		return $data;
 	}

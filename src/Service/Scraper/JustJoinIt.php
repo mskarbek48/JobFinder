@@ -23,10 +23,6 @@ class JustJoinIt extends AbstractScraper implements ScraperInterface
 {
 	const URL = "https://justjoin.it/";
 
-	public function __construct(UrlBuilderInterface $urlBuilder)
-	{
-		$this->urlBuilder = $urlBuilder;
-	}
 
 	public function scrape(): void
 	{
@@ -39,16 +35,17 @@ class JustJoinIt extends AbstractScraper implements ScraperInterface
 		$response = $request->getContent();
 		$crawler = new Crawler($response);
 
-		$next_data = $crawler->filter('script#__NEXT_DATA__')->first()->text();
-		$json = json_decode($next_data, true);
+		$data = $crawler->filter('script#__NEXT_DATA__')->first()->text();
+		$data = json_decode($data, true)["props"]["pageProps"]["dehydratedState"]["queries"][0]["state"]["data"]["pages"][0]["data"];
 
-		file_put_contents("test.json", json_encode($json, JSON_PRETTY_PRINT));
+
+		foreach($data as $once)
+		{
+			$offer = $this->extractor->extract($once);
+			$this->data[] = $offer;
+		}
 
 
 	}
 
-	public function getScrapedData(): array
-	{
-		return array("example");
-	}
 }
